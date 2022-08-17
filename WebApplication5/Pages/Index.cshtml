@@ -1,0 +1,38 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<form class="row g-3" method="post" id="myForm">
+ <select asp-for="JsonFile" asp-items="Model.Options" onchange="javascript:formSubmit(this)"></select>
+    @for (var i = 0; i < Model.Props.Count; i++)
+    {
+        <div class="col-md-5">
+            <label for="inputEmail4">Key</label>
+            <input name="Props[@i].Key" class="form-control" type="text" value="@Model.Props.ElementAt(i).Key" readonly />
+        </div>
+        <div class="col-md-7">
+            <label for="inputEmail4">Value</label>
+            <input name="Props[@i].Value" class="form-control" type="text" value="@Model.Props.ElementAt(i).Value" />
+        </div>
+    }
+    @foreach (var item in Model.Props.Keys)
+    {
+
+
+
+    }
+    <input type="submit" class="btn btn-success" value="Gönder" />
+</form>
+<script>
+    function formSubmit(elem) {
+        const urlPieces = [location.protocol, '//', location.host, location.pathname,'?JsonFile=',elem.value ]
+let url = urlPieces.join('')
+        window.location.href = url;
+    }
+</script>
